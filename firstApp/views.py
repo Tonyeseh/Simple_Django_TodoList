@@ -4,9 +4,9 @@ from .models import Todolist, Item
 
 # Create your views here.
 
-def index(response, id):
+def get_todo_by_id(response, id):
     Todo = Todolist.objects.get(id=id)
-    return HttpResponse("<h1>{}</h1>".format(Todo.name))
+    return render(response, 'firstApp/todolist.html', {'todo': Todo})
 
 def get_by_name(response, name):
     Todo = Todolist.objects.get(name=name)
@@ -15,3 +15,6 @@ def get_by_name(response, name):
 
 def v1(response):
     return HttpResponse("<h1>Version 1!<h1>")
+
+def home(response):
+    return render(response, 'firstApp/home.html', {})
