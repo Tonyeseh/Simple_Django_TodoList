@@ -7,6 +7,24 @@ from .forms import CreateListForm
 
 def get_todo_by_id(response, id):
     Todo = Todolist.objects.get(id=id)
+
+    if response.method == "POST":
+        if response.POST.get('save'):
+            for item in Todo.item_set.all():
+                if ('c' + str(item.id)) in response.POST.keys():
+                    item.complete = True
+                else:
+                    item.complete = False
+
+                item.save()
+
+        elif response.POST.get('add_item'):
+            text = response.POST.get('new_item')
+            if len(text) > 0:
+                Todo.item_set.create(text=text, complete=False)
+            else:
+                print("Text cannot be empty")
+            
     return render(response, 'firstApp/todolist.html', {'todo': Todo})
 
 def get_by_name(response, name):
