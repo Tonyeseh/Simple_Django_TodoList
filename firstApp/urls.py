@@ -7,4 +7,5 @@ urlpatterns = [
     path("<str:name>", views.get_by_name, name="Get Todo"),
     path("v1/", views.v1, name="Version 1"),
     path("", views.home, name="Home Page"),
+    path("home/", views.home, name="Home Page"),
 ]
