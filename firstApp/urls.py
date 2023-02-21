@@ -8,4 +8,5 @@ urlpatterns = [
     path("v1/", views.v1, name="Version 1"),
     path("", views.home, name="Home Page"),
     path("home/", views.home, name="Home Page"),
+    path("views/", views.view, name="View Todo")
 ]

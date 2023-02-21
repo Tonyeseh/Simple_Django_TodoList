@@ -8,6 +8,9 @@ from .forms import CreateListForm
 def get_todo_by_id(response, id):
     Todo = Todolist.objects.get(id=id)
 
+    if Todo not in response.user.todolist_set.all():
+        return render(response, "firstApp/views.html", {})
+
     if response.method == "POST":
         if response.POST.get('save'):
             for item in Todo.item_set.all():
@@ -43,9 +46,12 @@ def create_todo(response):
 
         if form.is_valid():
             name = form.cleaned_data['name']
-            todo = Todolist(name=name)
-            todo.save()
+            todo = response.user.todolist_set.create(name=name)
         return HttpResponseRedirect("/{}".format(todo.id))
     else:
         form = CreateListForm()
     return render(response, 'firstApp/create_todo.html', {"form": form})
+
+
+def view(response):
+    return render(response, "firstApp/views.html", {})
