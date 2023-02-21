@@ -3,10 +3,10 @@
 {% block title %}Create an Account{% endblock title %}
 {% comment %} {% load crispy_forms_tags %} {% endcomment %}
 
-{% block content %}
-    <form method="post" class="form-group">
+{% block login_stuff %}
+    <form method="post" action="/login/" class="form-group">
     {% csrf_token %}
         {{ form }}
         <button type="submit" class="btn btn-success">Register</button>
     </form>
-{% endblock content %}
+{% endblock login_stuff %}

@@ -45,7 +45,7 @@
     </head>
     <body>
         <div class="sidenav">
-            <a href="/home">Home</a>
+            <a href="/home/">Home</a>
             <a href="/create/">Create</a>
             <a href="/1">View</a>
         </div>
@@ -57,7 +57,12 @@
                         <h2 class="mt-2">Simple ToDo List</h2>
                     {% endblock header %}
                     <hr class="mt-0 mb-4">
-                    {% block content %}{% endblock content %}
+                    {% if user.is_authenticated %}
+                        {% block content %}{% endblock content %}
+                    {% endif %}
+                    {% if not user.is_authenticated %}
+                        {% block login_stuff %}{% endblock login_stuff %}
+                    {% endif %}
                 </div>
             </div>
         </div>
